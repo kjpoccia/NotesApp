@@ -55,7 +55,6 @@ app.get('/api/notes/:id', (request, response, next) => {
 
 app.put('/api/notes/:id', (request, response, next) => {
   const body = request.body
-  console.log(request.body)
 
   const note = {
     content: body.content,
@@ -84,7 +83,7 @@ const generateId = () => {
   return String(maxId + 1)
 }
 
-app.post('/api/notes', (request, response) => {
+app.post('/api/notes', (request, response, next) => {
   const body = request.body
   
   if (!body.content) {
@@ -96,7 +95,6 @@ app.post('/api/notes', (request, response) => {
   const note = new Note({
     content: body.content,
     important: Boolean(body.important) || false,
-    id: generateId(),
   })
 
   note.save().then(savedNote => {
