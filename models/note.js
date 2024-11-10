@@ -1,19 +1,5 @@
 const mongoose = require('mongoose')
 
-const url = process.env.MONGODB_URI;
-
-mongoose.set('strictQuery',false)
-
-console.log('connecting to ', url)
-
-mongoose.connect(url)
-    .then(result => {
-        console.log('connected to MongoDB')
-    })
-    .catch(error => {
-        console.log('error connecting to MongoDB: ', error.message)
-    })
-
 const noteSchema = new mongoose.Schema({
   content: {
     type: String,
@@ -22,8 +8,6 @@ const noteSchema = new mongoose.Schema({
   },
   important: Boolean,
 })
-
-const Note = mongoose.model('Note', noteSchema)
 
 noteSchema.set('toJSON', {
   transform: (document, returnedObject) => {
