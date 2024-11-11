@@ -6,6 +6,7 @@ const notesRouter = require('./controllers/notes')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
+const usersRouter = require('./controllers/users')
 
 mongoose.set('strictQuery', false)
 
@@ -19,6 +20,7 @@ mongoose.connect(config.MONGODB_URI)
     logger.error('error connection to MongoDB:', error.message)
   })
 
+app.use('/api/users', usersRouters)
 app.use(cors())
 app.use(express.static('dist'))
 app.use(express.json())
